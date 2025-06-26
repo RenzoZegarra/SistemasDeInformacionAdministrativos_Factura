@@ -68,6 +68,8 @@ public class InterfazLogin
         if ("admin".equals(usuario) && "1234".equals(contrasena)) {
             JOptionPane.showMessageDialog(frame, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             // Aquí podrías abrir la siguiente interfaz o ventana.
+            frame.dispose();
+            new InterfazPrincipal();
         } 
         else 
         {

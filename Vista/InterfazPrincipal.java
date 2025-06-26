@@ -83,6 +83,14 @@ public class InterfazPrincipal
             }
         });
 
+        // Acción para abrir ReporteVentas al hacer clic en Reportes Contables
+        btnReportesContables.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose(); // Cierra la ventana actual
+                new ReporteVentas(); // Abre la interfaz de ReporteVentas
+            }
+        });
 
         // Acción de cerrar sesión
         btnCerrarSesion.addActionListener(new ActionListener() {
