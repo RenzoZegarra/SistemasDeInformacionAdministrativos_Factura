@@ -65,6 +65,24 @@ public class InterfazPrincipal
             }
         });
 
+        // Acción para abrir FormularioMaestro al hacer clic en Gestión de Tablas Maestras
+        btnGestionTablas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose(); // Cierra la ventana actual
+                new FormularioMaestro("Cliente"); // Abre el formulario maestro (puedes cambiar el tipo si es necesario)
+            }
+        });
+
+         // Acción para abrir TrsFactura al hacer clic en Registro de Transacciones
+        btnRegistroTransacciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose(); // Cierra la ventana actual
+                new TrsFactura(); // Abre la interfaz de registro de transacciones
+            }
+        });
+
 
         // Acción de cerrar sesión
         btnCerrarSesion.addActionListener(new ActionListener() {
@@ -79,6 +97,7 @@ public class InterfazPrincipal
         frame.setLocationRelativeTo(null); // Centra la ventana
         frame.setVisible(true);
     }
+
 
     // Método para manejar el "Cerrar sesión" (regresa a la ventana de inicio de sesión)
     private void cerrarSesion() 
