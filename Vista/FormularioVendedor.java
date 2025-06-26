@@ -31,20 +31,28 @@ public class FormularioVendedor extends JFrame {
 
     private void agregarBotonesNavegacion() {
         JPanel panelNav = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        String[] entidades = {"Cliente", "Vendedor","Emisor"};
+        String[] entidades = {"Cliente", "Vendedor","Emisor","Productos","Contables","PtoVenta","Categoria","ModoPago"};
 
         for (String entidad : entidades) {
             JButton btn = new JButton(entidad);
             btn.addActionListener(e -> {
                 dispose(); // cerrar ventana actual
-                if(entidad.equals("Cliente")){
+                if (entidad.equals("Cliente")) {
                     new FormularioMaestro("Cliente");
-                }
-                if (entidad.equals("Vendedor")) {
+                } else if (entidad.equals("Vendedor")) {
                     new FormularioVendedor("Vendedor");
-                }
-                if(entidad.equals("Emisor")){
+                } else if (entidad.equals("Emisor")) {
                     new FormularioEmisor("Emisor");
+                } else if (entidad.equals("Productos")) {
+                    new FormularioProductos("Productos");
+                } else if (entidad.equals("Contables")) {
+                    new FormularioContables("Contables");
+                } else if (entidad.equals("PtoVenta")) {
+                    new FormularioPtoVenta("PtoVenta");
+                } else if (entidad.equals("Categoria")){
+                    new FormularioCategoria("Categoria");
+                } else if(entidad.equals("ModoPago")){
+                    new FormularioModoPago("ModoPago");
                 }
             });
             panelNav.add(btn);

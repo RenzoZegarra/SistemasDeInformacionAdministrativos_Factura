@@ -33,18 +33,28 @@ public class FormularioEmisor extends JFrame {
 
     private void agregarBotonesNavegacion() {
         JPanel panelNav = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        String[] entidades = {"Cliente", "Vendedor","Emisor"};
+        String[] entidades = {"Cliente", "Vendedor", "Emisor","Productos","Contables","PtoVenta","Categoria","ModoPago"};
 
         for (String entidad : entidades) {
             JButton btn = new JButton(entidad);
             btn.addActionListener(e -> {
                 dispose(); // Cerrar ventana actual
-                if (entidad.equals("Vendedor")) {
+                if (entidad.equals("Cliente")) {
+                    new FormularioMaestro("Cliente");
+                } else if (entidad.equals("Vendedor")) {
                     new FormularioVendedor("Vendedor");
-                }
-                // Aquí si se quiere que vuelva a "FormularioEmisor"
-                else if (entidad.equals("Cliente")) {
+                } else if (entidad.equals("Emisor")) {
                     new FormularioEmisor("Emisor");
+                } else if (entidad.equals("Productos")) {
+                    new FormularioProductos("Productos");
+                } else if (entidad.equals("Contables")) {
+                    new FormularioContables("Contables");
+                } else if (entidad.equals("PtoVenta")) {
+                    new FormularioPtoVenta("PtoVenta");
+                } else if (entidad.equals("Categoria")){
+                    new FormularioCategoria("Categoria");
+                } else if(entidad.equals("ModoPago")){
+                    new FormularioModoPago("ModoPago");
                 }
             });
             panelNav.add(btn);
@@ -54,7 +64,7 @@ public class FormularioEmisor extends JFrame {
     }
 
     private void agregarFormulario() {
-        JPanel panelForm = new JPanel(new GridLayout(10, 2, 5, 5));
+        JPanel panelForm = new JPanel(new GridLayout(11, 2, 5, 5)); // Cambié el número de filas a 11
 
         txtID = new JTextField();
         txtNombres = new JTextField();
@@ -76,8 +86,8 @@ public class FormularioEmisor extends JFrame {
         panelForm.add(txtApellidos);
         panelForm.add(new JLabel("RUC:"));
         panelForm.add(txtRUC);
-        panelForm.add(new JLabel("Dirección:"));
-        panelForm.add(txtDireccion);
+        panelForm.add(new JLabel("Dirección Fiscal:"));  // Nuevo campo para Dirección Fiscal
+        panelForm.add(txtDireccion);  // Asocia el campo de texto
         panelForm.add(new JLabel("Teléfono:"));
         panelForm.add(txtTelefono);
         panelForm.add(new JLabel("Correo:"));
@@ -93,7 +103,8 @@ public class FormularioEmisor extends JFrame {
     }
 
     private void agregarTabla() {
-        String[] columnas = {"Código", "RUC", "Descripción", "Dirección"};
+        // Añadí la columna de Dirección Fiscal
+        String[] columnas = {"Código", "RUC", "Descripción", "Dirección Fiscal"};
         modeloTabla = new DefaultTableModel(columnas, 0);
         tabla = new JTable(modeloTabla);
         JScrollPane scroll = new JScrollPane(tabla);
@@ -129,7 +140,7 @@ public class FormularioEmisor extends JFrame {
 
         btnLimpiar.addActionListener(e -> limpiarCampos());
         btnRegistrar.addActionListener(e -> registrarDatos());
-        
+
         btnVolver.addActionListener(e -> {
             dispose();
             // Aquí iría tu clase para volver al menú
@@ -145,11 +156,12 @@ public class FormularioEmisor extends JFrame {
     }
 
     private void registrarDatos() {
+        // Ahora registramos también la dirección fiscal
         String[] fila = {
             txtID.getText(),
             txtRUC.getText(),
             txtDescripcion.getText(),
-            txtDireccion.getText()
+            txtDireccion.getText() // Dirección fiscal
         };
 
         modeloTabla.addRow(fila);
@@ -161,7 +173,7 @@ public class FormularioEmisor extends JFrame {
         txtNombres.setText("");
         txtApellidos.setText("");
         txtRUC.setText("");
-        txtDireccion.setText("");
+        txtDireccion.setText(""); // Limpiar también la dirección
         txtTelefono.setText("");
         txtCorreo.setText("");
         txtNroDoc.setText("");
@@ -176,7 +188,7 @@ public class FormularioEmisor extends JFrame {
             txtID.setText(modeloTabla.getValueAt(fila, 0).toString());
             txtRUC.setText(modeloTabla.getValueAt(fila, 1).toString());
             txtDescripcion.setText(modeloTabla.getValueAt(fila, 2).toString());
-            txtDireccion.setText(modeloTabla.getValueAt(fila, 3).toString());
+            txtDireccion.setText(modeloTabla.getValueAt(fila, 3).toString()); // Cargar dirección fiscal
         }
     }
 
@@ -186,7 +198,7 @@ public class FormularioEmisor extends JFrame {
             modeloTabla.setValueAt(txtID.getText(), fila, 0);
             modeloTabla.setValueAt(txtRUC.getText(), fila, 1);
             modeloTabla.setValueAt(txtDescripcion.getText(), fila, 2);
-            modeloTabla.setValueAt(txtDireccion.getText(), fila, 3);
+            modeloTabla.setValueAt(txtDireccion.getText(), fila, 3); // Editar la dirección fiscal
             limpiarCampos();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un registro para editar.");
